@@ -1,0 +1,6 @@
+{
+  "name": "Mechanics Learning Dashboard",
+  "description": "Interactive classical mechanics learning module featuring physical simulations, real-time trajectory visualizers, and detailed physics concept quizzes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
