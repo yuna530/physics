@@ -64,15 +64,102 @@ export default function ProjectileQuiz({ theme }: ProjectileQuizProps) {
       </h4>
 
       {/* Physics Diagram */}
-      <div className={`h-36 rounded-2xl overflow-hidden relative border mb-3 ${
-        isDark ? 'bg-zinc-950/60 border-zinc-800' : 'bg-gray-50 border-gray-100'
+      <div className={`h-36 rounded-2xl overflow-hidden relative border mb-3 flex items-center justify-center ${
+        isDark ? 'bg-zinc-950/60 border-zinc-800/80' : 'bg-gray-50 border-gray-100'
       }`}>
-        <img 
-          alt="Projectile Motion Diagram" 
-          className="w-full h-full object-contain p-2" 
-          src={diagramUrl}
-          referrerPolicy="no-referrer"
-        />
+        <svg viewBox="0 0 320 140" className="w-full h-full font-sans select-none max-w-[280px]">
+          {/* Ground Line */}
+          <line 
+            x1="20" y1="110" x2="300" y2="110" 
+            className={`${isDark ? 'stroke-zinc-700' : 'stroke-gray-300'} stroke-2`} 
+          />
+          {/* Tick marks on ground for P, Q-proj, and R */}
+          <line x1="40" y1="110" x2="40" y2="114" className={isDark ? 'stroke-zinc-600' : 'stroke-gray-400'} />
+          <line x1="280" y1="110" x2="280" y2="114" className={isDark ? 'stroke-zinc-600' : 'stroke-gray-400'} />
+          <line x1="160" y1="110" x2="160" y2="114" className={isDark ? 'stroke-zinc-600' : 'stroke-gray-400'} />
+
+          {/* Height Dashed Line */}
+          <line 
+            x1="160" y1="45" x2="160" y2="110" 
+            className={`${isDark ? 'stroke-cyan-500/40' : 'stroke-[#4f378a]/40'} stroke-1`}
+            strokeDasharray="4 3"
+          />
+          {/* Height text */}
+          <text 
+            x="166" y="82" 
+            className={`text-[10px] font-bold ${isDark ? 'fill-cyan-400' : 'fill-[#4f378a]'}`}
+          >
+            3 m
+          </text>
+
+          {/* Parabolic Path */}
+          <path 
+            d="M 40,110 Q 160,-20 280,110" 
+            fill="none" 
+            className={`${isDark ? 'stroke-cyan-400' : 'stroke-[#4f378a]'} stroke-2`}
+            strokeDasharray="1"
+          />
+
+          {/* Launch Velocity Vector at P */}
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" className={isDark ? 'fill-cyan-400' : 'fill-[#4f378a]'} />
+            </marker>
+            <marker id="arrow-gray" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" className={isDark ? 'fill-zinc-500' : 'fill-gray-400'} />
+            </marker>
+          </defs>
+          
+          <line 
+            x1="40" y1="110" x2="68" y2="82" 
+            className={`${isDark ? 'stroke-cyan-400' : 'stroke-[#4f378a]'} stroke-2`}
+            markerEnd="url(#arrow)"
+          />
+          <text 
+            x="72" y="78" 
+            className={`text-[9px] font-bold ${isDark ? 'fill-cyan-400' : 'fill-[#4f378a]'}`}
+          >
+            v₀ = 10 m/s
+          </text>
+
+          {/* Projectile at point Q (apex) */}
+          <circle 
+            cx="160" cy="45" r="5.5" 
+            className={`${isDark ? 'fill-cyan-400 stroke-zinc-950' : 'fill-[#4f378a] stroke-white'} stroke-2`}
+          />
+          <text 
+            x="170" y="42" 
+            className={`text-[9px] font-bold ${isDark ? 'fill-zinc-400' : 'fill-gray-600'}`}
+          >
+            m = 0.2 kg
+          </text>
+
+          {/* Point Labels (P, Q, R) */}
+          <text 
+            x="38" y="125" 
+            className={`text-[11px] font-black ${isDark ? 'fill-zinc-300' : 'fill-gray-800'}`}
+          >
+            P
+          </text>
+          <text 
+            x="156" y="28" 
+            className={`text-[11px] font-black ${isDark ? 'fill-zinc-300' : 'fill-gray-800'}`}
+          >
+            Q
+          </text>
+          <text 
+            x="276" y="125" 
+            className={`text-[11px] font-black ${isDark ? 'fill-zinc-300' : 'fill-gray-800'}`}
+          >
+            R
+          </text>
+
+          {/* Gravity Indicator */}
+          <g transform="translate(265, 20)">
+            <line x1="0" y1="0" x2="0" y2="15" className={`${isDark ? 'stroke-zinc-500' : 'stroke-gray-400'} stroke-1.5`} markerEnd="url(#arrow-gray)" />
+            <text x="5" y="11" className={`text-[8.5px] font-bold ${isDark ? 'fill-zinc-500' : 'fill-gray-400'}`}>g = 10 m/s²</text>
+          </g>
+        </svg>
       </div>
 
       {/* Problem Description */}
